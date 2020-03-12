@@ -1,4 +1,4 @@
-package restapi
+package preset
 
 import (
 	"fmt"
