@@ -11,19 +11,19 @@ import (
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost"},
+		AllowOrigins:     []string{"http://localhost", "http://localhost:8080", "http:localhost:3002"},
 		AllowMethods:     []string{"GET"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == "http://localhost:3002"
-		},
-		MaxAge: 12 * time.Hour,
+		MaxAge:           12 * time.Hour,
 	}))
 
-	router.GET("/api/v1/role", handler.GetRoles)
-	router.GET("/api/v1/role/:id", handler.GetRole)
+	v1 := router.Group("/api/v1")
+	{
+		v1.GET("/role", handler.GetRoles)
+		v1.GET("/role/:id", handler.GetRole)
+	}
 
 	return router
 }

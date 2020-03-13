@@ -1,9 +1,7 @@
 package handler
 
 import (
-	"encoding/json"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,39 +21,13 @@ var Users []User = []User{
 // @Id getRoles
 // @Tags Role
 // @version 1.0.0
-// @produce application/json
-// @Success 200 string
-// @Router /api/v1/role
+// @produce json
+// @Success 200 {string} User
+// @Failure 400 {} string
+// @Failure 404 {} string
+// @Failure 500 {} string
+// @Router /role [get]
 func GetRoles(c *gin.Context) {
-	message, err := json.Marshal(&Users)
-	if err != nil {
-		c.String(http.StatusOK, string(message))
-		return
-	}
-	c.String(http.StatusInternalServerError, string(err.Error()))
-	return
-}
-
-// @Summary Get role by id
-// @Id getRole
-// @Tags Role
-// @version 1.0.0
-// @produce application/json
-// @Success 200 string
-// @Router /api/v1/role/{id}
-func GetRole(c *gin.Context) {
-	for _, user := range Users {
-		if id, _ := strconv.Atoi(c.Param("id")); id == user.Id {
-			message, err := json.Marshal(&user)
-			if err != nil {
-				c.String(http.StatusOK, string(message))
-				return
-			} else {
-				c.String(http.StatusInternalServerError, string(err.Error()))
-				return
-			}
-		}
-	}
-	c.String(http.StatusBadRequest, "No such role id")
+	c.JSON(http.StatusOK, Users)
 	return
 }
