@@ -30,7 +30,9 @@ paths:
         "200":
           description: OK
           schema:
-            type: string
+            items:
+              $ref: '#/definitions/handler.User'
+            type: array
         "400":
           description: Bad Request
           schema:
@@ -44,6 +46,31 @@ paths:
           schema:
             type: ""
       summary: Get all roles
+      tags:
+      - Role
+  /role/:id:
+    get:
+      operationId: getRole
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: ""
+        "404":
+          description: Not Found
+          schema:
+            type: ""
+        "500":
+          description: Internal Server Error
+          schema:
+            type: ""
+      summary: Get one role based on ID
       tags:
       - Role
 swagger: "2.0"

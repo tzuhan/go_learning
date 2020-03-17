@@ -1,8 +1,7 @@
 package main
 
 import (
-	"github.com/tzuhan/go_learning/router"
-	//"github.com/unrolled/secure" //HTTPS
+	"go_learning/router"
 )
 
 // @title GetRole API
@@ -21,9 +20,11 @@ import (
 // @BasePath /api/v1
 func main() {
 
-	r := router.SetupRouter()
+	httprs := router.SetupRouter("https")
+	httpr := router.SetupRouter("http")
 	//router.Use(TlsHandler())
-	r.Run(":8080")
+	httpr.Run(":8080")
+	httprs.Run(":433")
 	//router.RunTLS(":8080", "ssl.pem", "ssl.key")
 }
 
