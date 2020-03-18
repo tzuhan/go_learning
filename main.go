@@ -20,11 +20,11 @@ import (
 // @BasePath /api/v1
 func main() {
 
-	httprs := router.SetupRouter("https")
+	//httprs := router.SetupRouter("https")
 	httpr := router.SetupRouter("http")
 	//router.Use(TlsHandler())
 	httpr.Run(":8080")
-	httprs.Run(":433")
+	//httprs.Run(":433")
 	//router.RunTLS(":8080", "ssl.pem", "ssl.key")
 }
 

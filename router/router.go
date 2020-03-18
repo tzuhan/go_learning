@@ -16,8 +16,8 @@ import (
 
 func SetupRouter(credentialType string) *gin.Engine {
 	router := gin.Default()
+	gin.SetMode(gin.ReleaseMode)
 	if credentialType == "http" {
-		//gin.SetMode(gin.ReleaseMode)
 		v1 := router.Group("/api/v1")
 		router.Use(cors.New(cors.Options{
 			AllowedOrigins:   []string{"http://localhost:8080", "https://localhost:8080", "http://localhost:3002", "https://localhost:3002"},
