@@ -31,10 +31,9 @@ func SetupRouter(credentialType string) *gin.Engine {
 			v1.GET("/role", handler.GetRoles)
 			v1.GET("/role/:id", handler.GetRole)
 		}
-		if mode := gin.Mode(); mode == gin.DebugMode {
-			url := ginSwagger.URL(fmt.Sprintf("http://localhost:%d/swagger/doc.json", 8080))
-			router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
-		}
+		url := ginSwagger.URL(fmt.Sprintf("http://localhost:%d/swagger/doc.json", 8080))
+		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+
 	} else if credentialType == "https" {
 		secureMiddleware := secure.New(secure.Options{
 			FrameDeny: true,
